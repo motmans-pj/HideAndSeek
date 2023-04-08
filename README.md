@@ -2,8 +2,9 @@
 
 ## Current stage
 
-We currently have a Q-agent and an expected sarsa agent that are learning, there is a function value approximation agent for which the training function is not yet implemented (this should not take very long though). 
-The environment logic seems to be working as well. 
+* Game logic: should be good
+* Agents: Q-agent and Expected Sarsa agent working and training, function value approximation agent not yet adapted to current environment, but the logic implemented (was trained for flappy bird). 
+* Rendering: three options, text, matplotlib plot (just an experiment) and rgb render. 
 
 As observations, both agents get each others' location, the obstacles are fixed so as to limit the number of total possible states. 
 By giving the agents each others' location, we change the game to more of a game of 'tag', this is done to observe more interesting behavior. 
