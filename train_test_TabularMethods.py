@@ -12,7 +12,6 @@ def game_train(env, seeker, hider, n_ep, verbose = True):
             if ep % 1000 == 0:
                 print("\rEpisode {}/{}.".format(ep, n_ep), end="")
                 sys.stdout.flush()
-                env.render()
                 # Print average of last 1000 episodes
                 print(f'\n The average number of steps is: {np.mean(n_steps)}')
     
