@@ -111,7 +111,6 @@ class HideAndSeekAgent:
         # Process the state into a string such that it can be used to store q_values
         state = self.process_state(state)
         if np.random.random() < self.epsilon:
-            print('Random action')
             action = random.choice(available_actions)
         else:
             action = self.argmax(self.q_values[state], available_actions)
