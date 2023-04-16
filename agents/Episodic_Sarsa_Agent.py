@@ -1,7 +1,8 @@
-from agents.agent import HideAndSeekAgent
+from HideAndSeek.agents.agent import HideAndSeekAgent
 import numpy as np
 import random 
-import utilities.tiles3 as tc
+import HideAndSeek.utilities.tiles3 as tc
+
 
 # TileCoder class for Hide & Seek environment
 class TileCoder:
@@ -72,7 +73,7 @@ class EpisodicSemiGradientSarsaAgent(HideAndSeekAgent):
         self.w = None
         self.num_tilings = None
         self.num_tiles = None
-        self.fbtc = None
+        self.tc = None
         self.initial_weights = None
         self.previous_tiles = None
         self.epsilon = initial_epsilon
@@ -90,9 +91,9 @@ class EpisodicSemiGradientSarsaAgent(HideAndSeekAgent):
         # of shape (num actions, iht_size) here
         self.w = np.ones((self.num_actions, self.iht_size)) * self.initial_weights
         
-        # We initialize self.fbtc to the version of the 
+        # We initialize self.tc to the version of the
         # tile coder that we created
-        self.fbtc = TileCoder(iht_size=self.iht_size, 
+        self.tc = TileCoder(iht_size=self.iht_size,
                                          num_tilings=self.num_tilings, 
                                          num_tiles=self.num_tiles)
 
@@ -117,7 +118,7 @@ class EpisodicSemiGradientSarsaAgent(HideAndSeekAgent):
         # Otherwise choose the greedy action using the given argmax 
         # function and the action values (don't use numpy's armax)
         x_seeker, y_seeker, x_hider, y_hider = state
-        tiles = self.fbtc.get_tiles(x_seeker, y_seeker, x_hider, y_hider)
+        tiles = self.tc.get_tiles(x_seeker, y_seeker, x_hider, y_hider)
         action_values = [np.sum(self.w[action][tiles]) for action in range(self.num_actions)]
 
         if np.random.random() < self.epsilon:
@@ -139,16 +140,11 @@ class EpisodicSemiGradientSarsaAgent(HideAndSeekAgent):
         state = self.process_state(state)
         x_seeker, y_seeker, x_hider, y_hider = state
         
-        # Use self.fbtc to set active_tiles using x and y
+        # Use self.tc to set active_tiles using x and y
         # set current_action to the epsilon greedy chosen action using
         # the select_action function above with the active tiles
-        
-        # ----------------
-        # COMPLETE HERE
-        active_tiles =  self.fbtc.get_tiles(x_seeker, y_seeker, x_hider, y_hider) 
+        active_tiles =  self.tc.get_tiles(x_seeker, y_seeker, x_hider, y_hider)
         current_action, _ = self.policy(state, available_actions, update=True)
-        # # ----------------
-        
         self.last_action = current_action
         self.previous_tiles = np.copy(active_tiles)
         return self.last_action
@@ -158,17 +154,15 @@ class EpisodicSemiGradientSarsaAgent(HideAndSeekAgent):
         We have already done: first state to first action, received a reward and next state for that
         now we need to take an action and update
         :param state: the state/observation returned after the last action taken
-        :param action: the action chosen
         :param reward: the reward received after the last action taken
-        :param terminated: has the episode terminated after taking the action in the state
-        :param next_state: to what state have we transitioned?
+        :param available_actions: the actions the agent can take
         :return: chosen action
         """
         # choose the action here
         state = self.process_state(state, update=True)
         x_seeker, y_seeker, x_hider, y_hider = state
         
-        # Use self.fbtc to set active_tiles using x and y
+        # Use self.tc to set active_tiles using x and y
         # set current_action and action_value to the epsilon greedy chosen action using
         # the select_action function above with the active tiles
         
@@ -176,13 +170,11 @@ class EpisodicSemiGradientSarsaAgent(HideAndSeekAgent):
         # using the reward, action_value, self.discount_factor, self.w,
         # self.step_size, and the episodic semi gradient Sarsa update from the textbook
         
-        # ----------------
-        active_tiles = self.fbtc.get_tiles(x_seeker, y_seeker, x_hider, y_hider)
+        active_tiles = self.tc.get_tiles(x_seeker, y_seeker, x_hider, y_hider)
         current_action, action_value = self.policy(state, available_actions, update=True) 
-        # a real value
         update_target = reward + self.discount_factor * action_value - np.sum(self.w[self.last_action][self.previous_tiles])
         self.w[self.last_action][self.previous_tiles] +=  self.step_size * update_target * np.ones(len(active_tiles))
-        # # ----------------
+
         
         self.last_action = current_action
         self.previous_tiles = np.copy(active_tiles)
