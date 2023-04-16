@@ -5,7 +5,7 @@ import utilities.tiles3 as tc
 
 # TileCoder class for Hide & Seek environment
 class TileCoder:
-    def __init__(self, iht_size=2048, num_tilings=8, num_tiles=8):
+    def __init__(self, iht_size=4096, num_tilings=8, num_tiles=8):
         """
         Initializes the tile Coder
         Initializers:
