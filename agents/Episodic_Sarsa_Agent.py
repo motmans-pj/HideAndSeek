@@ -5,7 +5,7 @@ import utilities.tiles3 as tc
 
 # TileCoder class for Hide & Seek environment
 class TileCoder:
-    def __init__(self, iht_size=8192, num_tilings=8, num_tiles=8):
+    def __init__(self, iht_size=16384, num_tilings=8, num_tiles=8):
         """
         Initializes the tile Coder
         Initializers:
@@ -81,7 +81,7 @@ class EpisodicSemiGradientSarsaAgent(HideAndSeekAgent):
         """Setup for the agent called when the experiment first starts."""
         self.num_tilings = agent_info.get("num_tilings", 8)
         self.num_tiles = agent_info.get("num_tiles", 8)
-        self.iht_size = agent_info.get("iht_size", 8192)
+        self.iht_size = agent_info.get("iht_size", 16384)
         self.step_size = self.step_size / self.num_tilings
         self.initial_weights = agent_info.get("initial_weights", 0.0)
         
