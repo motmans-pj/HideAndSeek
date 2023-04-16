@@ -61,7 +61,7 @@ def game_train_episodic(env,seeker,hider, n_ep):
 
 def game_test_episodic(env,seeker,hider, n_ep_train, n_ep_test):
   
-  game_train(env,seeker,hider, n_ep_train)
+  game_train_episodic(env,seeker,hider, n_ep_train)
   n_hider_victories = 0
   n_seeker_victories = 0
   n_steps_to_victory = []
