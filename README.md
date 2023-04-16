@@ -1,7 +1,7 @@
 # HideAndSeek
-Group project in Reinforcement Learning Class
-Authors: Paul Bédier, Lucrezia Certo, Pieter Jan Motmans
-Institute: MSc in Data Sciences & Business Analytics, CentraleSupelec
+Group project in Reinforcement Learning Class <br />
+Authors: Paul Bédier, Lucrezia Certo, Pieter Jan Motmans <br />
+Institute: MSc in Data Sciences & Business Analytics, CentraleSupelec <br />
 
 /!\ PLEASE RUN NOTEBOOK USING COLAB fOR RENDER COMPATIBILITIES /!\
 
