@@ -458,6 +458,6 @@ class HideAndSeek(ParallelEnv):
             print('')
 
             # Display image, clear cell every 0.5 seconds
-            cv2.imshow(img_bgr);
+            cv2_imshow(img_bgr)
             time.sleep(0.5)
             # output.clear()
