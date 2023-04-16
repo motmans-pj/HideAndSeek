@@ -8,6 +8,8 @@ import gymnasium as gym
 from pettingzoo.test import parallel_api_test
 from collections import defaultdict
 from matplotlib import pyplot as plt
+import cv2
+import time
 
 
 class HideAndSeek(ParallelEnv):
@@ -368,7 +370,7 @@ class HideAndSeek(ParallelEnv):
             pygame.display.set_caption("HideAndSeek")
             # background = pygame.Surface(screen.get_size())
 
-            bg = pygame.image.load("bg.png")
+            bg = pygame.image.load("images/bg.png")
             bg = pygame.transform.scale(bg, (500, 500))
 
             # INSIDE OF THE GAME LOOP
@@ -377,13 +379,13 @@ class HideAndSeek(ParallelEnv):
             # background.fill((255, 255, 255))
 
             # Load images
-            seeker_image = pygame.image.load("Seeker.png").convert_alpha()
+            seeker_image = pygame.image.load("images/Seeker.png").convert_alpha()
             seeker_image = pygame.transform.scale(seeker_image, (100, 100))
-            hider_image = pygame.image.load("whitewalker.png").convert_alpha()
+            hider_image = pygame.image.load("images/whitewalker.png").convert_alpha()
             hider_image = pygame.transform.scale(hider_image, (50, 50))
-            obstacle_image = pygame.image.load("iceberg.png").convert_alpha()
+            obstacle_image = pygame.image.load("images/iceberg.png").convert_alpha()
             obstacle_image = pygame.transform.scale(obstacle_image, (50, 50))
-            line_of_sight_image = pygame.image.load("Fire.png").convert_alpha()
+            line_of_sight_image = pygame.image.load("images/Fire.png").convert_alpha()
             line_of_sight_image = pygame.transform.scale(line_of_sight_image, (25, 25))
 
             # Draw obstacles
@@ -437,8 +439,8 @@ class HideAndSeek(ParallelEnv):
 
             # Update the screen
             pygame.display.flip()
-            pygame.time.wait(int(1000 / self.metadata["render_fps"]))
-            print('--------------------------------')
+            #pygame.time.wait(int(1000 / self.metadata["render_fps"]))
+            #print('--------------------------------')
 
             #######
             # In colab, you can not show the screen, the below is a way to deal
@@ -446,15 +448,16 @@ class HideAndSeek(ParallelEnv):
             # and uncomment the pygame.wait
             #######
 
-            #view = pygame.surfarray.array3d(screen)
+            view = pygame.surfarray.array3d(screen)
 
             #  convert from (width, height, channel) to (height, width, channel)
-            #view = view.transpose([1, 0, 2])
+            view = view.transpose([1, 0, 2])
 
             #  convert from rgb to bgr
-            #img_bgr = cv2.cvtColor(view, cv2.COLOR_RGB2BGR)
+            img_bgr = cv2.cvtColor(view, cv2.COLOR_BGR2RGB)
+            print('')
 
             # Display image, clear cell every 0.5 seconds
-            #cv2_imshow(img_bgr)
-            #time.sleep(0.5)
+            cv2.imshow(img_bgr);
+            time.sleep(0.5)
             # output.clear()

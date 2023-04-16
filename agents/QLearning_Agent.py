@@ -1,4 +1,4 @@
-from agent import HideAndSeekAgent
+from agents.agent import HideAndSeekAgent
 import numpy as np
 
 

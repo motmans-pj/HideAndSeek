@@ -93,7 +93,7 @@ class HideAndSeekAgent:
             if i in available_actions:
                 if q_values[i] > top:
                     top = q_values[i]
-                    ties = []
+                    ties = [i]
 
                 if q_values[i] == top:
                     ties.append(i)
