@@ -2,7 +2,7 @@ import os, sys
 import numpy as np
 from statistics import mean
 
-def game_train(env,seeker,hider, n_ep):
+def game_train_episodic(env,seeker,hider, n_ep):
   n_steps = []
   for ep in range(1,n_ep+1):
         n_steps_ep = 0
@@ -59,7 +59,7 @@ def game_train(env,seeker,hider, n_ep):
         hider.decay_epsilon()
   
 
-def game_test(env,seeker,hider, n_ep_train, n_ep_test):
+def game_test_episodic(env,seeker,hider, n_ep_train, n_ep_test):
   
   game_train(env,seeker,hider, n_ep_train)
   n_hider_victories = 0
@@ -107,7 +107,7 @@ def game_test(env,seeker,hider, n_ep_train, n_ep_test):
   print(f'The hider has won {n_hider_victories} times, \nThe seeker has won {n_seeker_victories} times\n')
   return n_steps_to_victory
 
-def avg_victories(envir, seeker,hider, n_episodes,n_series):
+def avg_victories_episodic(envir, seeker,hider, n_episodes,n_series):
   results = []
   for s in range(n_series):
     n_hider_victories = 0
