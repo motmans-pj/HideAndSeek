@@ -9,7 +9,9 @@ from pettingzoo.test import parallel_api_test
 from collections import defaultdict
 from matplotlib import pyplot as plt
 import cv2
-import time
+from google.colab.patches import cv2_imshow
+from google.colab import output
+import time 
 
 
 class HideAndSeek(ParallelEnv):
