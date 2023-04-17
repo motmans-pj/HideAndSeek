@@ -22,6 +22,10 @@ The goal of this project is two-fold. The first objective is to implement a cust
 └── HideAndSeek.ipynb
     *notebook containing all our experiments /!\ PLEASE RUN USING COLAB fOR RENDER COMPATIBILITIES /!\*
 ```
+# Preview
+
+![alt text](https://i.imgur.com/mcoPXYW.png)
+![alt text](https://i.imgur.com/YdhWX50.png)
 
 # Requirements
 gymnasium==0.28.1 <br />
